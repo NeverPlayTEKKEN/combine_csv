@@ -1,5 +1,6 @@
 import os
 import csv
+import shutil
 
 def main():
     csv_path = input("csv格納先のパスを入力してください：\n")
@@ -13,8 +14,15 @@ def main():
     os.mkdir("./work")
     
     # カレントディレクトリに成果物ファイルを作成
-    csv_file = open("./all.csv", 'w')
+    all_csv_file = open("./all.csv", 'w')
 
+    # すべてのcsvファイルに対して処理を実行
+    for csv_file in os.listdir(csv_path):
+        shutil.copy(csv_path + "/" + csv_file, "./work/" + csv_file)
+    
+    # workフォルダ内のすべてのファイルに対して処理を実行
+    for csv_file in os.listdir("./work"):
+        
 
 if __name__ == '__main__':
     main()
